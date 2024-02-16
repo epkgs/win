@@ -2156,7 +2156,7 @@ func AddClipboardFormatListener(hwnd HWND) bool {
 		return false
 	}
 
-	ret, _, _ := syscall.Syscall(addClipboardFormatListener.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(addClipboardFormatListener.Addr(), 1,
 		uintptr(hwnd),
 		0,
 		0)
@@ -2198,7 +2198,7 @@ func GetKeyboardLayout(idThread uint32) HKL {
 }
 
 func AdjustWindowRect(lpRect *RECT, dwStyle uint32, bMenu bool) bool {
-	ret, _, _ := syscall.Syscall(adjustWindowRect.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(adjustWindowRect.Addr(), 3,
 		uintptr(unsafe.Pointer(lpRect)),
 		uintptr(dwStyle),
 		uintptr(BoolToBOOL(bMenu)))
@@ -2207,7 +2207,7 @@ func AdjustWindowRect(lpRect *RECT, dwStyle uint32, bMenu bool) bool {
 }
 
 func AttachThreadInput(idAttach int32, idAttachTo int32, fAttach bool) bool {
-	ret, _, _ := syscall.Syscall(attachThreadInput.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(attachThreadInput.Addr(), 3,
 		uintptr(idAttach),
 		uintptr(idAttachTo),
 		uintptr(BoolToBOOL(fAttach)))
@@ -2216,7 +2216,7 @@ func AttachThreadInput(idAttach int32, idAttachTo int32, fAttach bool) bool {
 }
 
 func AnimateWindow(hwnd HWND, dwTime, dwFlags uint32) bool {
-	ret, _, _ := syscall.Syscall(animateWindow.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(animateWindow.Addr(), 3,
 		uintptr(hwnd),
 		uintptr(dwTime),
 		uintptr(dwFlags))
@@ -2225,7 +2225,7 @@ func AnimateWindow(hwnd HWND, dwTime, dwFlags uint32) bool {
 }
 
 func BeginDeferWindowPos(nNumWindows int32) HDWP {
-	ret, _, _ := syscall.Syscall(beginDeferWindowPos.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(beginDeferWindowPos.Addr(), 1,
 		uintptr(nNumWindows),
 		0,
 		0)
@@ -2234,7 +2234,7 @@ func BeginDeferWindowPos(nNumWindows int32) HDWP {
 }
 
 func GetWindowThreadProcessId(hwnd HWND, processId *uint32) uint32 {
-	ret, _, _ := syscall.Syscall(getWindowThreadProcessId.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindowThreadProcessId.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(unsafe.Pointer(processId)),
 		0)
@@ -2243,7 +2243,7 @@ func GetWindowThreadProcessId(hwnd HWND, processId *uint32) uint32 {
 }
 
 func BeginPaint(hwnd HWND, lpPaint *PAINTSTRUCT) HDC {
-	ret, _, _ := syscall.Syscall(beginPaint.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(beginPaint.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(unsafe.Pointer(lpPaint)),
 		0)
@@ -2252,7 +2252,7 @@ func BeginPaint(hwnd HWND, lpPaint *PAINTSTRUCT) HDC {
 }
 
 func BringWindowToTop(hwnd HWND) bool {
-	ret, _, _ := syscall.Syscall(bringWindowToTop.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(bringWindowToTop.Addr(), 1,
 		uintptr(hwnd),
 		0,
 		0)
@@ -2260,7 +2260,7 @@ func BringWindowToTop(hwnd HWND) bool {
 }
 
 func CallWindowProc(lpPrevWndFunc uintptr, hWnd HWND, Msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(callWindowProc.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(callWindowProc.Addr(), 5,
 		lpPrevWndFunc,
 		uintptr(hWnd),
 		uintptr(Msg),
@@ -2272,7 +2272,7 @@ func CallWindowProc(lpPrevWndFunc uintptr, hWnd HWND, Msg uint32, wParam, lParam
 }
 
 func ChangeWindowMessageFilterEx(hwnd HWND, msg uint32, action uint32, changeFilterStruct *CHANGEFILTERSTRUCT) bool {
-	ret, _, _ := syscall.Syscall6(changeWindowMessageFilterEx.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(changeWindowMessageFilterEx.Addr(), 4,
 		uintptr(hwnd),
 		uintptr(msg),
 		uintptr(action),
@@ -2283,7 +2283,7 @@ func ChangeWindowMessageFilterEx(hwnd HWND, msg uint32, action uint32, changeFil
 }
 
 func CheckMenuRadioItem(hmenu HMENU, first, last, check, flags uint32) bool {
-	ret, _, _ := syscall.Syscall6(checkMenuRadioItem.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(checkMenuRadioItem.Addr(), 5,
 		uintptr(hmenu),
 		uintptr(first),
 		uintptr(last),
@@ -2295,7 +2295,7 @@ func CheckMenuRadioItem(hmenu HMENU, first, last, check, flags uint32) bool {
 }
 
 func ClientToScreen(hwnd HWND, lpPoint *POINT) bool {
-	ret, _, _ := syscall.Syscall(clientToScreen.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(clientToScreen.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(unsafe.Pointer(lpPoint)),
 		0)
@@ -2304,7 +2304,7 @@ func ClientToScreen(hwnd HWND, lpPoint *POINT) bool {
 }
 
 func CloseClipboard() bool {
-	ret, _, _ := syscall.Syscall(closeClipboard.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(closeClipboard.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2314,7 +2314,7 @@ func CloseClipboard() bool {
 
 func CreateDialogParam(instRes HINSTANCE, name *uint16, parent HWND,
 	proc, param uintptr) HWND {
-	ret, _, _ := syscall.Syscall6(createDialogParam.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(createDialogParam.Addr(), 5,
 		uintptr(instRes),
 		uintptr(unsafe.Pointer(name)),
 		uintptr(parent),
@@ -2326,7 +2326,7 @@ func CreateDialogParam(instRes HINSTANCE, name *uint16, parent HWND,
 }
 
 func CreateIconIndirect(lpiconinfo *ICONINFO) HICON {
-	ret, _, _ := syscall.Syscall(createIconIndirect.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(createIconIndirect.Addr(), 1,
 		uintptr(unsafe.Pointer(lpiconinfo)),
 		0,
 		0)
@@ -2335,7 +2335,7 @@ func CreateIconIndirect(lpiconinfo *ICONINFO) HICON {
 }
 
 func CreateMenu() HMENU {
-	ret, _, _ := syscall.Syscall(createMenu.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(createMenu.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2344,7 +2344,7 @@ func CreateMenu() HMENU {
 }
 
 func CreatePopupMenu() HMENU {
-	ret, _, _ := syscall.Syscall(createPopupMenu.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(createPopupMenu.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2375,7 +2375,7 @@ func CreateWindowEx(dwExStyle uint32, lpClassName, lpWindowName *uint16, dwStyle
 }
 
 func DeferWindowPos(hWinPosInfo HDWP, hWnd, hWndInsertAfter HWND, x, y, cx, cy int32, uFlags uint32) HDWP {
-	ret, _, _ := syscall.Syscall9(deferWindowPos.Addr(), 8,
+	ret, _, _ := syscall.SyscallN(deferWindowPos.Addr(), 8,
 		uintptr(hWinPosInfo),
 		uintptr(hWnd),
 		uintptr(hWndInsertAfter),
@@ -2390,7 +2390,7 @@ func DeferWindowPos(hWinPosInfo HDWP, hWnd, hWndInsertAfter HWND, x, y, cx, cy i
 }
 
 func DefWindowProc(hWnd HWND, Msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(defWindowProc.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(defWindowProc.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(Msg),
 		wParam,
@@ -2402,7 +2402,7 @@ func DefWindowProc(hWnd HWND, Msg uint32, wParam, lParam uintptr) uintptr {
 }
 
 func DeleteMenu(hMenu HMENU, uPosition uint32, uFlags uint32) bool {
-	ret, _, _ := syscall.Syscall(deleteMenu.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(deleteMenu.Addr(), 3,
 		uintptr(hMenu),
 		uintptr(uPosition),
 		uintptr(uFlags))
@@ -2411,7 +2411,7 @@ func DeleteMenu(hMenu HMENU, uPosition uint32, uFlags uint32) bool {
 }
 
 func DestroyIcon(hIcon HICON) bool {
-	ret, _, _ := syscall.Syscall(destroyIcon.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(destroyIcon.Addr(), 1,
 		uintptr(hIcon),
 		0,
 		0)
@@ -2420,7 +2420,7 @@ func DestroyIcon(hIcon HICON) bool {
 }
 
 func DestroyMenu(hMenu HMENU) bool {
-	ret, _, _ := syscall.Syscall(destroyMenu.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(destroyMenu.Addr(), 1,
 		uintptr(hMenu),
 		0,
 		0)
@@ -2429,7 +2429,7 @@ func DestroyMenu(hMenu HMENU) bool {
 }
 
 func DestroyWindow(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(destroyWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(destroyWindow.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -2438,7 +2438,7 @@ func DestroyWindow(hWnd HWND) bool {
 }
 
 func DialogBoxParam(instRes HINSTANCE, name *uint16, parent HWND, proc, param uintptr) int {
-	ret, _, _ := syscall.Syscall6(dialogBoxParam.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(dialogBoxParam.Addr(), 5,
 		uintptr(instRes),
 		uintptr(unsafe.Pointer(name)),
 		uintptr(parent),
@@ -2450,7 +2450,7 @@ func DialogBoxParam(instRes HINSTANCE, name *uint16, parent HWND, proc, param ui
 }
 
 func DispatchMessage(msg *MSG) uintptr {
-	ret, _, _ := syscall.Syscall(dispatchMessage.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(dispatchMessage.Addr(), 1,
 		uintptr(unsafe.Pointer(msg)),
 		0,
 		0)
@@ -2459,7 +2459,7 @@ func DispatchMessage(msg *MSG) uintptr {
 }
 
 func DrawFocusRect(hDC HDC, lprc *RECT) bool {
-	ret, _, _ := syscall.Syscall(drawFocusRect.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(drawFocusRect.Addr(), 2,
 		uintptr(hDC),
 		uintptr(unsafe.Pointer(lprc)),
 		0)
@@ -2468,7 +2468,7 @@ func DrawFocusRect(hDC HDC, lprc *RECT) bool {
 }
 
 func DrawIconEx(hdc HDC, xLeft, yTop int32, hIcon HICON, cxWidth, cyWidth int32, istepIfAniCur uint32, hbrFlickerFreeDraw HBRUSH, diFlags uint32) bool {
-	ret, _, _ := syscall.Syscall9(drawIconEx.Addr(), 9,
+	ret, _, _ := syscall.SyscallN(drawIconEx.Addr(), 9,
 		uintptr(hdc),
 		uintptr(xLeft),
 		uintptr(yTop),
@@ -2483,7 +2483,7 @@ func DrawIconEx(hdc HDC, xLeft, yTop int32, hIcon HICON, cxWidth, cyWidth int32,
 }
 
 func DrawMenuBar(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(drawMenuBar.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(drawMenuBar.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -2492,7 +2492,7 @@ func DrawMenuBar(hWnd HWND) bool {
 }
 
 func DrawTextEx(hdc HDC, lpchText *uint16, cchText int32, lprc *RECT, dwDTFormat uint32, lpDTParams *DRAWTEXTPARAMS) int32 {
-	ret, _, _ := syscall.Syscall6(drawTextEx.Addr(), 6,
+	ret, _, _ := syscall.SyscallN(drawTextEx.Addr(), 6,
 		uintptr(hdc),
 		uintptr(unsafe.Pointer(lpchText)),
 		uintptr(cchText),
@@ -2504,7 +2504,7 @@ func DrawTextEx(hdc HDC, lpchText *uint16, cchText int32, lprc *RECT, dwDTFormat
 }
 
 func EmptyClipboard() bool {
-	ret, _, _ := syscall.Syscall(emptyClipboard.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(emptyClipboard.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2513,7 +2513,7 @@ func EmptyClipboard() bool {
 }
 
 func EnableMenuItem(hMenu HMENU, uIDEnableItem uint32, uEnable uint32) bool {
-	ret, _, _ := syscall.Syscall(enableMenuItem.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(enableMenuItem.Addr(), 3,
 		uintptr(hMenu),
 		uintptr(uIDEnableItem),
 		uintptr(uEnable))
@@ -2522,7 +2522,7 @@ func EnableMenuItem(hMenu HMENU, uIDEnableItem uint32, uEnable uint32) bool {
 }
 
 func EnableWindow(hWnd HWND, bEnable bool) bool {
-	ret, _, _ := syscall.Syscall(enableWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(enableWindow.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(BoolToBOOL(bEnable)),
 		0)
@@ -2531,7 +2531,7 @@ func EnableWindow(hWnd HWND, bEnable bool) bool {
 }
 
 func EndDeferWindowPos(hWinPosInfo HDWP) bool {
-	ret, _, _ := syscall.Syscall(endDeferWindowPos.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(endDeferWindowPos.Addr(), 1,
 		uintptr(hWinPosInfo),
 		0,
 		0)
@@ -2540,7 +2540,7 @@ func EndDeferWindowPos(hWinPosInfo HDWP) bool {
 }
 
 func EndDialog(hwnd HWND, result int) bool {
-	ret, _, _ := syscall.Syscall(endDialog.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(endDialog.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(result),
 		0)
@@ -2549,7 +2549,7 @@ func EndDialog(hwnd HWND, result int) bool {
 }
 
 func EndPaint(hwnd HWND, lpPaint *PAINTSTRUCT) bool {
-	ret, _, _ := syscall.Syscall(endPaint.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(endPaint.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(unsafe.Pointer(lpPaint)),
 		0)
@@ -2560,7 +2560,7 @@ func EndPaint(hwnd HWND, lpPaint *PAINTSTRUCT) bool {
 type EnumWindowsProc func(hWnd HWND, lParam uintptr) uintptr
 
 func EnumChildWindows(hWndParent HWND, lpEnumFunc EnumWindowsProc, lParam uintptr) bool {
-	ret, _, _ := syscall.Syscall(enumChildWindows.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(enumChildWindows.Addr(), 3,
 		uintptr(hWndParent),
 		syscall.NewCallbackCDecl(lpEnumFunc),
 		lParam)
@@ -2568,7 +2568,7 @@ func EnumChildWindows(hWndParent HWND, lpEnumFunc EnumWindowsProc, lParam uintpt
 	return ret != 0
 }
 func EnumWindows(lpEnumFunc EnumWindowsProc, lParam uintptr) bool {
-	ret, _, _ := syscall.Syscall(enumWindows.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(enumWindows.Addr(), 2,
 		syscall.NewCallbackCDecl(lpEnumFunc),
 		lParam, 0)
 
@@ -2576,7 +2576,7 @@ func EnumWindows(lpEnumFunc EnumWindowsProc, lParam uintptr) bool {
 }
 
 func EnumThreadWindows(threadId uint32, lpEnumFunc EnumWindowsProc, lParam uintptr) bool {
-	ret, _, _ := syscall.Syscall(enumThreadWindows.Addr(), 3, uintptr(threadId),
+	ret, _, _ := syscall.SyscallN(enumThreadWindows.Addr(), 3, uintptr(threadId),
 		syscall.NewCallbackCDecl(lpEnumFunc),
 		lParam)
 
@@ -2584,7 +2584,7 @@ func EnumThreadWindows(threadId uint32, lpEnumFunc EnumWindowsProc, lParam uintp
 }
 
 func FindWindow(lpClassName, lpWindowName *uint16) HWND {
-	ret, _, _ := syscall.Syscall(findWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(findWindow.Addr(), 2,
 		uintptr(unsafe.Pointer(lpClassName)),
 		uintptr(unsafe.Pointer(lpWindowName)),
 		0)
@@ -2593,7 +2593,7 @@ func FindWindow(lpClassName, lpWindowName *uint16) HWND {
 }
 
 func GetActiveWindow() HWND {
-	ret, _, _ := syscall.Syscall(getActiveWindow.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(getActiveWindow.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2602,7 +2602,7 @@ func GetActiveWindow() HWND {
 }
 
 func GetAncestor(hWnd HWND, gaFlags uint32) HWND {
-	ret, _, _ := syscall.Syscall(getAncestor.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getAncestor.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(gaFlags),
 		0)
@@ -2612,7 +2612,7 @@ func GetAncestor(hWnd HWND, gaFlags uint32) HWND {
 
 func GetCaretPos() (POINT, bool) {
 	var p POINT
-	ret, _, _ := syscall.Syscall(getCaretPos.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getCaretPos.Addr(), 1,
 		uintptr(unsafe.Pointer(&p)),
 		0,
 		0)
@@ -2622,7 +2622,7 @@ func GetCaretPos() (POINT, bool) {
 
 func GetClassName(hWnd HWND) (string, error) {
 	className := make([]uint16, MAX_PATH)
-	ret, _, e := syscall.Syscall(getClassName.Addr(), 3,
+	ret, _, e := syscall.SyscallN(getClassName.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(&className[0])),
 		uintptr(MAX_PATH))
@@ -2634,7 +2634,7 @@ func GetClassName(hWnd HWND) (string, error) {
 }
 
 func GetClientRect(hWnd HWND, rect *RECT) bool {
-	ret, _, _ := syscall.Syscall(getClientRect.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getClientRect.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(rect)),
 		0)
@@ -2643,7 +2643,7 @@ func GetClientRect(hWnd HWND, rect *RECT) bool {
 }
 
 func GetClipboardData(uFormat uint32) HANDLE {
-	ret, _, _ := syscall.Syscall(getClipboardData.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getClipboardData.Addr(), 1,
 		uintptr(uFormat),
 		0,
 		0)
@@ -2652,7 +2652,7 @@ func GetClipboardData(uFormat uint32) HANDLE {
 }
 
 func GetCursorPos(lpPoint *POINT) bool {
-	ret, _, _ := syscall.Syscall(getCursorPos.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getCursorPos.Addr(), 1,
 		uintptr(unsafe.Pointer(lpPoint)),
 		0,
 		0)
@@ -2661,7 +2661,7 @@ func GetCursorPos(lpPoint *POINT) bool {
 }
 
 func GetDesktopWindow() HWND {
-	ret, _, _ := syscall.Syscall(getDesktopWindow.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(getDesktopWindow.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2670,7 +2670,7 @@ func GetDesktopWindow() HWND {
 }
 
 func GetDC(hWnd HWND) HDC {
-	ret, _, _ := syscall.Syscall(getDC.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getDC.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -2679,7 +2679,7 @@ func GetDC(hWnd HWND) HDC {
 }
 
 func GetDlgItem(hDlg HWND, nIDDlgItem int32) HWND {
-	ret, _, _ := syscall.Syscall(getDlgItem.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getDlgItem.Addr(), 2,
 		uintptr(hDlg),
 		uintptr(nIDDlgItem),
 		0)
@@ -2695,7 +2695,7 @@ func GetDpiForWindow(hwnd HWND) uint32 {
 		return uint32(GetDeviceCaps(hdc, LOGPIXELSY))
 	}
 
-	ret, _, _ := syscall.Syscall(getDpiForWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getDpiForWindow.Addr(), 1,
 		uintptr(hwnd),
 		0,
 		0)
@@ -2704,7 +2704,7 @@ func GetDpiForWindow(hwnd HWND) uint32 {
 }
 
 func GetFocus() HWND {
-	ret, _, _ := syscall.Syscall(getFocus.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(getFocus.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2713,7 +2713,7 @@ func GetFocus() HWND {
 }
 
 func GetForegroundWindow() HWND {
-	ret, _, _ := syscall.Syscall(getForegroundWindow.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(getForegroundWindow.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2722,7 +2722,7 @@ func GetForegroundWindow() HWND {
 }
 
 func GetIconInfo(hicon HICON, piconinfo *ICONINFO) bool {
-	ret, _, _ := syscall.Syscall(getIconInfo.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getIconInfo.Addr(), 2,
 		uintptr(hicon),
 		uintptr(unsafe.Pointer(piconinfo)),
 		0)
@@ -2731,7 +2731,7 @@ func GetIconInfo(hicon HICON, piconinfo *ICONINFO) bool {
 }
 
 func GetKeyState(nVirtKey int32) uint16 {
-	ret, _, _ := syscall.Syscall(getKeyState.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getKeyState.Addr(), 1,
 		uintptr(nVirtKey),
 		0,
 		0)
@@ -2740,7 +2740,7 @@ func GetKeyState(nVirtKey int32) uint16 {
 }
 
 func GetMenuCheckMarkDimensions() int32 {
-	ret, _, _ := syscall.Syscall(getMenuCheckMarkDimensions.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(getMenuCheckMarkDimensions.Addr(), 0,
 		0,
 		0,
 		0)
@@ -2749,7 +2749,7 @@ func GetMenuCheckMarkDimensions() int32 {
 }
 
 func GetMenuInfo(hmenu HMENU, lpcmi *MENUINFO) bool {
-	ret, _, _ := syscall.Syscall(getMenuInfo.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getMenuInfo.Addr(), 2,
 		uintptr(hmenu),
 		uintptr(unsafe.Pointer(lpcmi)),
 		0)
@@ -2758,7 +2758,7 @@ func GetMenuInfo(hmenu HMENU, lpcmi *MENUINFO) bool {
 }
 
 func GetMenuItemCount(hMenu HMENU) int32 {
-	ret, _, _ := syscall.Syscall(getMenuItemCount.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getMenuItemCount.Addr(), 1,
 		uintptr(hMenu),
 		0,
 		0)
@@ -2767,7 +2767,7 @@ func GetMenuItemCount(hMenu HMENU) int32 {
 }
 
 func GetMenuItemID(hMenu HMENU, nPos int32) uint32 {
-	ret, _, _ := syscall.Syscall(getMenuItemID.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getMenuItemID.Addr(), 2,
 		uintptr(hMenu),
 		uintptr(nPos),
 		0)
@@ -2776,7 +2776,7 @@ func GetMenuItemID(hMenu HMENU, nPos int32) uint32 {
 }
 
 func GetMenuItemInfo(hmenu HMENU, item uint32, fByPosition BOOL, lpmii *MENUITEMINFO) bool {
-	ret, _, _ := syscall.Syscall6(getMenuItemInfo.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(getMenuItemInfo.Addr(), 4,
 		uintptr(hmenu),
 		uintptr(item),
 		uintptr(fByPosition),
@@ -2788,7 +2788,7 @@ func GetMenuItemInfo(hmenu HMENU, item uint32, fByPosition BOOL, lpmii *MENUITEM
 }
 
 func GetMessage(msg *MSG, hWnd HWND, msgFilterMin, msgFilterMax uint32) BOOL {
-	ret, _, _ := syscall.Syscall6(getMessage.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(getMessage.Addr(), 4,
 		uintptr(unsafe.Pointer(msg)),
 		uintptr(hWnd),
 		uintptr(msgFilterMin),
@@ -2800,7 +2800,7 @@ func GetMessage(msg *MSG, hWnd HWND, msgFilterMin, msgFilterMax uint32) BOOL {
 }
 
 func GetMonitorInfo(hMonitor HMONITOR, lpmi *MONITORINFO) bool {
-	ret, _, _ := syscall.Syscall(getMonitorInfo.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getMonitorInfo.Addr(), 2,
 		uintptr(hMonitor),
 		uintptr(unsafe.Pointer(lpmi)),
 		0)
@@ -2809,7 +2809,7 @@ func GetMonitorInfo(hMonitor HMONITOR, lpmi *MONITORINFO) bool {
 }
 
 func GetMonitorInfoEx(hMonitor HMONITOR, lpmi *MONITORINFOEX) bool {
-	ret, _, _ := syscall.Syscall(getMonitorInfo.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getMonitorInfo.Addr(), 2,
 		uintptr(hMonitor),
 		uintptr(unsafe.Pointer(lpmi)),
 		0)
@@ -2825,7 +2825,7 @@ func EnumDisplaySettings(szDeviceName *uint16, iModeNum uint32, devMode *DEVMODE
 }
 
 func GetParent(hWnd HWND) HWND {
-	ret, _, _ := syscall.Syscall(getParent.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getParent.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -2834,7 +2834,7 @@ func GetParent(hWnd HWND) HWND {
 }
 
 func GetRawInputData(hRawInput HRAWINPUT, uiCommand uint32, pData unsafe.Pointer, pcbSize *uint32, cBSizeHeader uint32) uint32 {
-	ret, _, _ := syscall.Syscall6(getRawInputData.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(getRawInputData.Addr(), 5,
 		uintptr(hRawInput),
 		uintptr(uiCommand),
 		uintptr(pData),
@@ -2846,7 +2846,7 @@ func GetRawInputData(hRawInput HRAWINPUT, uiCommand uint32, pData unsafe.Pointer
 }
 
 func GetScrollInfo(hwnd HWND, fnBar int32, lpsi *SCROLLINFO) bool {
-	ret, _, _ := syscall.Syscall(getScrollInfo.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(getScrollInfo.Addr(), 3,
 		uintptr(hwnd),
 		uintptr(fnBar),
 		uintptr(unsafe.Pointer(lpsi)))
@@ -2855,7 +2855,7 @@ func GetScrollInfo(hwnd HWND, fnBar int32, lpsi *SCROLLINFO) bool {
 }
 
 func GetSubMenu(hMenu HMENU, nPos int32) HMENU {
-	ret, _, _ := syscall.Syscall(getSubMenu.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getSubMenu.Addr(), 2,
 		uintptr(hMenu),
 		uintptr(nPos),
 		0)
@@ -2864,7 +2864,7 @@ func GetSubMenu(hMenu HMENU, nPos int32) HMENU {
 }
 
 func GetSysColor(nIndex int) uint32 {
-	ret, _, _ := syscall.Syscall(getSysColor.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getSysColor.Addr(), 1,
 		uintptr(nIndex),
 		0,
 		0)
@@ -2873,7 +2873,7 @@ func GetSysColor(nIndex int) uint32 {
 }
 
 func GetSysColorBrush(nIndex int) HBRUSH {
-	ret, _, _ := syscall.Syscall(getSysColorBrush.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getSysColorBrush.Addr(), 1,
 		uintptr(nIndex),
 		0,
 		0)
@@ -2882,7 +2882,7 @@ func GetSysColorBrush(nIndex int) HBRUSH {
 }
 
 func GetSystemMenu(hWnd HWND, revert bool) HMENU {
-	ret, _, _ := syscall.Syscall(getSystemMenu.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getSystemMenu.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(BoolToBOOL(revert)),
 		0)
@@ -2890,7 +2890,7 @@ func GetSystemMenu(hWnd HWND, revert bool) HMENU {
 }
 
 func GetSystemMetrics(nIndex int32) int32 {
-	ret, _, _ := syscall.Syscall(getSystemMetrics.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(getSystemMetrics.Addr(), 1,
 		uintptr(nIndex),
 		0,
 		0)
@@ -2903,7 +2903,7 @@ func GetSystemMetricsForDpi(nIndex int32, dpi uint32) int32 {
 		return GetSystemMetrics(nIndex)
 	}
 
-	ret, _, _ := syscall.Syscall(getSystemMetricsForDpi.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getSystemMetricsForDpi.Addr(), 2,
 		uintptr(nIndex),
 		uintptr(dpi),
 		0)
@@ -2912,7 +2912,7 @@ func GetSystemMetricsForDpi(nIndex int32, dpi uint32) int32 {
 }
 
 func GetWindow(hWnd HWND, uCmd uint32) HWND {
-	ret, _, _ := syscall.Syscall(getWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindow.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(uCmd),
 		0)
@@ -2935,7 +2935,7 @@ type WindowInfo struct {
 
 func GetWindowInfo(hWnd HWND) (WindowInfo, bool) {
 	var info WindowInfo
-	ret, _, _ := syscall.Syscall(getWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindow.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(&info)),
 		0)
@@ -2944,7 +2944,7 @@ func GetWindowInfo(hWnd HWND) (WindowInfo, bool) {
 }
 
 func GetWindowLong(hWnd HWND, index int32) int32 {
-	ret, _, _ := syscall.Syscall(getWindowLong.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindowLong.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(index),
 		0)
@@ -2953,7 +2953,7 @@ func GetWindowLong(hWnd HWND, index int32) int32 {
 }
 
 func GetWindowLongPtr(hWnd HWND, index int32) uintptr {
-	ret, _, _ := syscall.Syscall(getWindowLongPtr.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindowLongPtr.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(index),
 		0)
@@ -2962,7 +2962,7 @@ func GetWindowLongPtr(hWnd HWND, index int32) uintptr {
 }
 
 func GetWindowPlacement(hWnd HWND, lpwndpl *WINDOWPLACEMENT) bool {
-	ret, _, _ := syscall.Syscall(getWindowPlacement.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindowPlacement.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpwndpl)),
 		0)
@@ -2972,7 +2972,7 @@ func GetWindowPlacement(hWnd HWND, lpwndpl *WINDOWPLACEMENT) bool {
 
 func GetWindowRect(hWnd HWND) (RECT, bool) {
 	var rect RECT
-	ret, _, _ := syscall.Syscall(getWindowRect.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(getWindowRect.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(&rect)),
 		0)
@@ -2981,7 +2981,7 @@ func GetWindowRect(hWnd HWND) (RECT, bool) {
 }
 
 func InsertMenuItem(hMenu HMENU, uItem uint32, fByPosition bool, lpmii *MENUITEMINFO) bool {
-	ret, _, _ := syscall.Syscall6(insertMenuItem.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(insertMenuItem.Addr(), 4,
 		uintptr(hMenu),
 		uintptr(uItem),
 		uintptr(BoolToBOOL(fByPosition)),
@@ -2993,7 +2993,7 @@ func InsertMenuItem(hMenu HMENU, uItem uint32, fByPosition bool, lpmii *MENUITEM
 }
 
 func InvalidateRect(hWnd HWND, lpRect *RECT, bErase bool) bool {
-	ret, _, _ := syscall.Syscall(invalidateRect.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(invalidateRect.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpRect)),
 		uintptr(BoolToBOOL(bErase)))
@@ -3002,7 +3002,7 @@ func InvalidateRect(hWnd HWND, lpRect *RECT, bErase bool) bool {
 }
 
 func IsChild(hWndParent, hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isChild.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(isChild.Addr(), 2,
 		uintptr(hWndParent),
 		uintptr(hWnd),
 		0)
@@ -3011,7 +3011,7 @@ func IsChild(hWndParent, hWnd HWND) bool {
 }
 
 func IsClipboardFormatAvailable(format uint32) bool {
-	ret, _, _ := syscall.Syscall(isClipboardFormatAvailable.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isClipboardFormatAvailable.Addr(), 1,
 		uintptr(format),
 		0,
 		0)
@@ -3020,7 +3020,7 @@ func IsClipboardFormatAvailable(format uint32) bool {
 }
 
 func IsDialogMessage(hWnd HWND, msg *MSG) bool {
-	ret, _, _ := syscall.Syscall(isDialogMessage.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(isDialogMessage.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(msg)),
 		0)
@@ -3029,7 +3029,7 @@ func IsDialogMessage(hWnd HWND, msg *MSG) bool {
 }
 
 func IsIconic(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isIconic.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isIconic.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3038,7 +3038,7 @@ func IsIconic(hWnd HWND) bool {
 }
 
 func IsWindowEnabled(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isWindowEnabled.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isWindowEnabled.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3047,7 +3047,7 @@ func IsWindowEnabled(hWnd HWND) bool {
 }
 
 func IsWindowVisible(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isWindowVisible.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isWindowVisible.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3056,7 +3056,7 @@ func IsWindowVisible(hWnd HWND) bool {
 }
 
 func IsWindow(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isWindow.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3065,7 +3065,7 @@ func IsWindow(hWnd HWND) bool {
 }
 
 func IsZoomed(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(isZoomed.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(isZoomed.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3074,7 +3074,7 @@ func IsZoomed(hWnd HWND) bool {
 }
 
 func KillTimer(hWnd HWND, uIDEvent uintptr) bool {
-	ret, _, _ := syscall.Syscall(killTimer.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(killTimer.Addr(), 2,
 		uintptr(hWnd),
 		uIDEvent,
 		0)
@@ -3083,7 +3083,7 @@ func KillTimer(hWnd HWND, uIDEvent uintptr) bool {
 }
 
 func LoadCursor(hInstance HINSTANCE, lpCursorName *uint16) HCURSOR {
-	ret, _, _ := syscall.Syscall(loadCursor.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(loadCursor.Addr(), 2,
 		uintptr(hInstance),
 		uintptr(unsafe.Pointer(lpCursorName)),
 		0)
@@ -3092,7 +3092,7 @@ func LoadCursor(hInstance HINSTANCE, lpCursorName *uint16) HCURSOR {
 }
 
 func LoadIcon(hInstance HINSTANCE, lpIconName *uint16) HICON {
-	ret, _, _ := syscall.Syscall(loadIcon.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(loadIcon.Addr(), 2,
 		uintptr(hInstance),
 		uintptr(unsafe.Pointer(lpIconName)),
 		0)
@@ -3101,7 +3101,7 @@ func LoadIcon(hInstance HINSTANCE, lpIconName *uint16) HICON {
 }
 
 func LoadImage(hinst HINSTANCE, lpszName *uint16, uType uint32, cxDesired, cyDesired int32, fuLoad uint32) HANDLE {
-	ret, _, _ := syscall.Syscall6(loadImage.Addr(), 6,
+	ret, _, _ := syscall.SyscallN(loadImage.Addr(), 6,
 		uintptr(hinst),
 		uintptr(unsafe.Pointer(lpszName)),
 		uintptr(uType),
@@ -3113,7 +3113,7 @@ func LoadImage(hinst HINSTANCE, lpszName *uint16, uType uint32, cxDesired, cyDes
 }
 
 func LoadMenu(hinst HINSTANCE, name *uint16) HMENU {
-	ret, _, _ := syscall.Syscall(loadMenu.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(loadMenu.Addr(), 2,
 		uintptr(hinst),
 		uintptr(unsafe.Pointer(name)),
 		0)
@@ -3122,7 +3122,7 @@ func LoadMenu(hinst HINSTANCE, name *uint16) HMENU {
 }
 
 func LoadString(instRes HINSTANCE, id uint32, buf *uint16, length int32) int32 {
-	ret, _, _ := syscall.Syscall6(loadString.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(loadString.Addr(), 4,
 		uintptr(instRes),
 		uintptr(id),
 		uintptr(unsafe.Pointer(buf)),
@@ -3148,7 +3148,7 @@ func LoadString(instRes HINSTANCE, id uint32, buf *uint16, length int32) int32 {
 //
 // The function will return true if the function succeeds, false if otherwise.
 func MessageBeep(uType uint32) bool {
-	ret, _, _ := syscall.Syscall(messageBeep.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(messageBeep.Addr(), 2,
 		uintptr(uType),
 		0,
 		0)
@@ -3157,7 +3157,7 @@ func MessageBeep(uType uint32) bool {
 }
 
 func MessageBox(hWnd HWND, lpText, lpCaption *uint16, uType uint32) int32 {
-	ret, _, _ := syscall.Syscall6(messageBox.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(messageBox.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpText)),
 		uintptr(unsafe.Pointer(lpCaption)),
@@ -3169,7 +3169,7 @@ func MessageBox(hWnd HWND, lpText, lpCaption *uint16, uType uint32) int32 {
 }
 
 func MonitorFromWindow(hwnd HWND, dwFlags uint32) HMONITOR {
-	ret, _, _ := syscall.Syscall(monitorFromWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(monitorFromWindow.Addr(), 2,
 		uintptr(hwnd),
 		uintptr(dwFlags),
 		0)
@@ -3177,7 +3177,7 @@ func MonitorFromWindow(hwnd HWND, dwFlags uint32) HMONITOR {
 	return HMONITOR(ret)
 }
 func MonitorFromPoint(x, y int32, dwFlags uint32) HMONITOR {
-	ret, _, _ := syscall.Syscall(monitorFromPoint.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(monitorFromPoint.Addr(), 2,
 		uintptr((uint64(x)&0xFFFFFFFF)|(uint64(y)<<32)),
 		uintptr(dwFlags), 0)
 
@@ -3185,7 +3185,7 @@ func MonitorFromPoint(x, y int32, dwFlags uint32) HMONITOR {
 }
 
 func MoveWindow(hWnd HWND, x, y, width, height int32, repaint bool) bool {
-	ret, _, _ := syscall.Syscall6(moveWindow.Addr(), 6,
+	ret, _, _ := syscall.SyscallN(moveWindow.Addr(), 6,
 		uintptr(hWnd),
 		uintptr(x),
 		uintptr(y),
@@ -3197,7 +3197,7 @@ func MoveWindow(hWnd HWND, x, y, width, height int32, repaint bool) bool {
 }
 
 func NotifyWinEvent(event uint32, hwnd HWND, idObject, idChild int32) {
-	syscall.Syscall6(notifyWinEvent.Addr(), 4,
+	syscall.SyscallN(notifyWinEvent.Addr(), 4,
 		uintptr(event),
 		uintptr(hwnd),
 		uintptr(idObject),
@@ -3207,7 +3207,7 @@ func NotifyWinEvent(event uint32, hwnd HWND, idObject, idChild int32) {
 }
 
 func UnregisterClass(name *uint16) bool {
-	ret, _, _ := syscall.Syscall(unregisterClass.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(unregisterClass.Addr(), 1,
 		uintptr(unsafe.Pointer(name)),
 		0,
 		0)
@@ -3216,7 +3216,7 @@ func UnregisterClass(name *uint16) bool {
 }
 
 func OpenClipboard(hWndNewOwner HWND) bool {
-	ret, _, _ := syscall.Syscall(openClipboard.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(openClipboard.Addr(), 1,
 		uintptr(hWndNewOwner),
 		0,
 		0)
@@ -3225,7 +3225,7 @@ func OpenClipboard(hWndNewOwner HWND) bool {
 }
 
 func PeekMessage(lpMsg *MSG, hWnd HWND, wMsgFilterMin, wMsgFilterMax, wRemoveMsg uint32) bool {
-	ret, _, _ := syscall.Syscall6(peekMessage.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(peekMessage.Addr(), 5,
 		uintptr(unsafe.Pointer(lpMsg)),
 		uintptr(hWnd),
 		uintptr(wMsgFilterMin),
@@ -3237,7 +3237,7 @@ func PeekMessage(lpMsg *MSG, hWnd HWND, wMsgFilterMin, wMsgFilterMax, wRemoveMsg
 }
 
 func PostMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(postMessage.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(postMessage.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(msg),
 		wParam,
@@ -3248,7 +3248,7 @@ func PostMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
 	return ret
 }
 func PostThreadMessage(threadId, msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(postThreadMessage.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(postThreadMessage.Addr(), 4,
 		uintptr(threadId),
 		uintptr(msg),
 		wParam,
@@ -3260,7 +3260,7 @@ func PostThreadMessage(threadId, msg uint32, wParam, lParam uintptr) uintptr {
 }
 
 func PostQuitMessage(exitCode int32) {
-	syscall.Syscall(postQuitMessage.Addr(), 1,
+	syscall.SyscallN(postQuitMessage.Addr(), 1,
 		uintptr(exitCode),
 		0,
 		0)
@@ -3287,7 +3287,7 @@ const (
 )
 
 func RedrawWindow(hWnd HWND, lprcUpdate *RECT, hrgnUpdate HRGN, flags uint32) bool {
-	ret, _, _ := syscall.Syscall6(redrawWindow.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(redrawWindow.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lprcUpdate)),
 		uintptr(hrgnUpdate),
@@ -3299,7 +3299,7 @@ func RedrawWindow(hWnd HWND, lprcUpdate *RECT, hrgnUpdate HRGN, flags uint32) bo
 }
 
 func RegisterClassEx(windowClass *WNDCLASSEX) ATOM {
-	ret, _, _ := syscall.Syscall(registerClassEx.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(registerClassEx.Addr(), 1,
 		uintptr(unsafe.Pointer(windowClass)),
 		0,
 		0)
@@ -3308,7 +3308,7 @@ func RegisterClassEx(windowClass *WNDCLASSEX) ATOM {
 }
 
 func RegisterRawInputDevices(pRawInputDevices *RAWINPUTDEVICE, uiNumDevices uint32, cbSize uint32) bool {
-	ret, _, _ := syscall.Syscall(registerRawInputDevices.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(registerRawInputDevices.Addr(), 3,
 		uintptr(unsafe.Pointer(pRawInputDevices)),
 		uintptr(uiNumDevices),
 		uintptr(cbSize))
@@ -3317,7 +3317,7 @@ func RegisterRawInputDevices(pRawInputDevices *RAWINPUTDEVICE, uiNumDevices uint
 }
 
 func RegisterWindowMessage(lpString *uint16) uint32 {
-	ret, _, _ := syscall.Syscall(registerWindowMessage.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(registerWindowMessage.Addr(), 1,
 		uintptr(unsafe.Pointer(lpString)),
 		0,
 		0)
@@ -3326,7 +3326,7 @@ func RegisterWindowMessage(lpString *uint16) uint32 {
 }
 
 func ReleaseCapture() bool {
-	ret, _, _ := syscall.Syscall(releaseCapture.Addr(), 0,
+	ret, _, _ := syscall.SyscallN(releaseCapture.Addr(), 0,
 		0,
 		0,
 		0)
@@ -3335,7 +3335,7 @@ func ReleaseCapture() bool {
 }
 
 func ReleaseDC(hWnd HWND, hDC HDC) bool {
-	ret, _, _ := syscall.Syscall(releaseDC.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(releaseDC.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(hDC),
 		0)
@@ -3344,7 +3344,7 @@ func ReleaseDC(hWnd HWND, hDC HDC) bool {
 }
 
 func RemoveMenu(hMenu HMENU, uPosition, uFlags uint32) bool {
-	ret, _, _ := syscall.Syscall(removeMenu.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(removeMenu.Addr(), 3,
 		uintptr(hMenu),
 		uintptr(uPosition),
 		uintptr(uFlags))
@@ -3353,7 +3353,7 @@ func RemoveMenu(hMenu HMENU, uPosition, uFlags uint32) bool {
 }
 
 func ScreenToClient(hWnd HWND, point *POINT) bool {
-	ret, _, _ := syscall.Syscall(screenToClient.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(screenToClient.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(point)),
 		0)
@@ -3362,7 +3362,7 @@ func ScreenToClient(hWnd HWND, point *POINT) bool {
 }
 
 func SendDlgItemMessage(hWnd HWND, id int32, msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(sendDlgItemMessage.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(sendDlgItemMessage.Addr(), 5,
 		uintptr(hWnd),
 		uintptr(id),
 		uintptr(msg),
@@ -3375,7 +3375,7 @@ func SendDlgItemMessage(hWnd HWND, id int32, msg uint32, wParam, lParam uintptr)
 
 // pInputs expects a unsafe.Pointer to a slice of MOUSE_INPUT or KEYBD_INPUT or HARDWARE_INPUT structs.
 func SendInput(nInputs uint32, pInputs unsafe.Pointer, cbSize int32) uint32 {
-	ret, _, _ := syscall.Syscall(sendInput.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(sendInput.Addr(), 3,
 		uintptr(nInputs),
 		uintptr(pInputs),
 		uintptr(cbSize))
@@ -3384,7 +3384,7 @@ func SendInput(nInputs uint32, pInputs unsafe.Pointer, cbSize int32) uint32 {
 }
 
 func SendMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(sendMessage.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(sendMessage.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(msg),
 		wParam,
@@ -3395,7 +3395,7 @@ func SendMessage(hWnd HWND, msg uint32, wParam, lParam uintptr) uintptr {
 }
 
 func SetActiveWindow(hWnd HWND) HWND {
-	ret, _, _ := syscall.Syscall(setActiveWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(setActiveWindow.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3404,7 +3404,7 @@ func SetActiveWindow(hWnd HWND) HWND {
 }
 
 func SetCapture(hWnd HWND) HWND {
-	ret, _, _ := syscall.Syscall(setCapture.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(setCapture.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3413,7 +3413,7 @@ func SetCapture(hWnd HWND) HWND {
 }
 
 func SetClipboardData(uFormat uint32, hMem HANDLE) HANDLE {
-	ret, _, _ := syscall.Syscall(setClipboardData.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setClipboardData.Addr(), 2,
 		uintptr(uFormat),
 		uintptr(hMem),
 		0)
@@ -3422,7 +3422,7 @@ func SetClipboardData(uFormat uint32, hMem HANDLE) HANDLE {
 }
 
 func SetCursor(hCursor HCURSOR) HCURSOR {
-	ret, _, _ := syscall.Syscall(setCursor.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(setCursor.Addr(), 1,
 		uintptr(hCursor),
 		0,
 		0)
@@ -3431,7 +3431,7 @@ func SetCursor(hCursor HCURSOR) HCURSOR {
 }
 
 func SetCursorPos(X, Y int32) bool {
-	ret, _, _ := syscall.Syscall(setCursorPos.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setCursorPos.Addr(), 2,
 		uintptr(X),
 		uintptr(Y),
 		0)
@@ -3440,7 +3440,7 @@ func SetCursorPos(X, Y int32) bool {
 }
 
 func SetFocus(hWnd HWND) HWND {
-	ret, _, _ := syscall.Syscall(setFocus.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(setFocus.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3449,7 +3449,7 @@ func SetFocus(hWnd HWND) HWND {
 }
 
 func SetForegroundWindow(hWnd HWND) bool {
-	ret, _, _ := syscall.Syscall(setForegroundWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(setForegroundWindow.Addr(), 1,
 		uintptr(hWnd),
 		0,
 		0)
@@ -3458,7 +3458,7 @@ func SetForegroundWindow(hWnd HWND) bool {
 }
 
 func SwitchToThisWindow(hWnd HWND, bRestore bool) {
-	syscall.Syscall(switchToThisWindow.Addr(), 2,
+	syscall.SyscallN(switchToThisWindow.Addr(), 2,
 		uintptr(hWnd),
 		1,
 		0)
@@ -3467,7 +3467,7 @@ func SwitchToThisWindow(hWnd HWND, bRestore bool) {
 }
 
 func SetMenu(hWnd HWND, hMenu HMENU) bool {
-	ret, _, _ := syscall.Syscall(setMenu.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setMenu.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(hMenu),
 		0)
@@ -3476,7 +3476,7 @@ func SetMenu(hWnd HWND, hMenu HMENU) bool {
 }
 
 func SetMenuDefaultItem(hMenu HMENU, uItem uint32, fByPosition bool) bool {
-	ret, _, _ := syscall.Syscall(setMenuDefaultItem.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(setMenuDefaultItem.Addr(), 3,
 		uintptr(hMenu),
 		uintptr(uItem),
 		uintptr(BoolToBOOL(fByPosition)))
@@ -3485,7 +3485,7 @@ func SetMenuDefaultItem(hMenu HMENU, uItem uint32, fByPosition bool) bool {
 }
 
 func SetMenuInfo(hmenu HMENU, lpcmi *MENUINFO) bool {
-	ret, _, _ := syscall.Syscall(setMenuInfo.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setMenuInfo.Addr(), 2,
 		uintptr(hmenu),
 		uintptr(unsafe.Pointer(lpcmi)),
 		0)
@@ -3494,7 +3494,7 @@ func SetMenuInfo(hmenu HMENU, lpcmi *MENUINFO) bool {
 }
 
 func SetMenuItemBitmaps(hMenu HMENU, uPosition uint32, uFlags uint32, hBitmapUnchecked HBITMAP, hBitmapChecked HBITMAP) bool {
-	ret, _, _ := syscall.Syscall6(setMenuItemBitmaps.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(setMenuItemBitmaps.Addr(), 5,
 		uintptr(hMenu),
 		uintptr(uPosition),
 		uintptr(uFlags),
@@ -3506,7 +3506,7 @@ func SetMenuItemBitmaps(hMenu HMENU, uPosition uint32, uFlags uint32, hBitmapUnc
 }
 
 func SetMenuItemInfo(hMenu HMENU, uItem uint32, fByPosition bool, lpmii *MENUITEMINFO) bool {
-	ret, _, _ := syscall.Syscall6(setMenuItemInfo.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(setMenuItemInfo.Addr(), 4,
 		uintptr(hMenu),
 		uintptr(uItem),
 		uintptr(BoolToBOOL(fByPosition)),
@@ -3518,7 +3518,7 @@ func SetMenuItemInfo(hMenu HMENU, uItem uint32, fByPosition bool, lpmii *MENUITE
 }
 
 func SetParent(hWnd HWND, parentHWnd HWND) HWND {
-	ret, _, _ := syscall.Syscall(setParent.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setParent.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(parentHWnd),
 		0)
@@ -3527,7 +3527,7 @@ func SetParent(hWnd HWND, parentHWnd HWND) HWND {
 }
 
 func SetRect(lprc *RECT, xLeft, yTop, xRight, yBottom uint32) BOOL {
-	ret, _, _ := syscall.Syscall6(setRect.Addr(), 5,
+	ret, _, _ := syscall.SyscallN(setRect.Addr(), 5,
 		uintptr(unsafe.Pointer(lprc)),
 		uintptr(xLeft),
 		uintptr(yTop),
@@ -3539,7 +3539,7 @@ func SetRect(lprc *RECT, xLeft, yTop, xRight, yBottom uint32) BOOL {
 }
 
 func SetScrollInfo(hwnd HWND, fnBar int32, lpsi *SCROLLINFO, fRedraw bool) int32 {
-	ret, _, _ := syscall.Syscall6(setScrollInfo.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(setScrollInfo.Addr(), 4,
 		uintptr(hwnd),
 		uintptr(fnBar),
 		uintptr(unsafe.Pointer(lpsi)),
@@ -3551,7 +3551,7 @@ func SetScrollInfo(hwnd HWND, fnBar int32, lpsi *SCROLLINFO, fRedraw bool) int32
 }
 
 func SetTimer(hWnd HWND, nIDEvent uintptr, uElapse uint32, lpTimerFunc uintptr) uintptr {
-	ret, _, _ := syscall.Syscall6(setTimer.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(setTimer.Addr(), 4,
 		uintptr(hWnd),
 		nIDEvent,
 		uintptr(uElapse),
@@ -3565,7 +3565,7 @@ func SetTimer(hWnd HWND, nIDEvent uintptr, uElapse uint32, lpTimerFunc uintptr) 
 type WINEVENTPROC func(hWinEventHook HWINEVENTHOOK, event uint32, hwnd HWND, idObject int32, idChild int32, idEventThread uint32, dwmsEventTime uint32) uintptr
 
 func SetWinEventHook(eventMin uint32, eventMax uint32, hmodWinEventProc HMODULE, callbackFunction WINEVENTPROC, idProcess uint32, idThread uint32, dwFlags uint32) (HWINEVENTHOOK, error) {
-	ret, _, err := syscall.Syscall9(setWinEventHook.Addr(), 7,
+	ret, _, err := syscall.SyscallN(setWinEventHook.Addr(), 7,
 		uintptr(eventMin),
 		uintptr(eventMax),
 		uintptr(hmodWinEventProc),
@@ -3583,7 +3583,7 @@ func SetWinEventHook(eventMin uint32, eventMax uint32, hmodWinEventProc HMODULE,
 }
 
 func SetWindowLong(hWnd HWND, index, value int32) int32 {
-	ret, _, _ := syscall.Syscall(setWindowLong.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(setWindowLong.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(index),
 		uintptr(value))
@@ -3592,7 +3592,7 @@ func SetWindowLong(hWnd HWND, index, value int32) int32 {
 }
 
 func SetWindowLongPtr(hWnd HWND, index int, value uintptr) uintptr {
-	ret, _, _ := syscall.Syscall(setWindowLongPtr.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(setWindowLongPtr.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(index),
 		value)
@@ -3601,7 +3601,7 @@ func SetWindowLongPtr(hWnd HWND, index int, value uintptr) uintptr {
 }
 
 func SetWindowPlacement(hWnd HWND, lpwndpl *WINDOWPLACEMENT) bool {
-	ret, _, _ := syscall.Syscall(setWindowPlacement.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setWindowPlacement.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lpwndpl)),
 		0)
@@ -3610,7 +3610,7 @@ func SetWindowPlacement(hWnd HWND, lpwndpl *WINDOWPLACEMENT) bool {
 }
 
 func SetWindowRgn(hWnd HWND, hRgn HRGN, redraw bool) bool {
-	ret, _, _ := syscall.Syscall(setWindowRgn.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(setWindowRgn.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(hRgn),
 		uintptr(BoolToBOOL(redraw)))
@@ -3619,7 +3619,7 @@ func SetWindowRgn(hWnd HWND, hRgn HRGN, redraw bool) bool {
 }
 
 func SetWindowPos(hWnd, hWndInsertAfter HWND, x, y, width, height int32, flags uint32) bool {
-	ret, _, _ := syscall.Syscall9(setWindowPos.Addr(), 7,
+	ret, _, _ := syscall.SyscallN(setWindowPos.Addr(), 7,
 		uintptr(hWnd),
 		uintptr(hWndInsertAfter),
 		uintptr(x),
@@ -3634,7 +3634,7 @@ func SetWindowPos(hWnd, hWndInsertAfter HWND, x, y, width, height int32, flags u
 }
 
 func ShowWindow(hWnd HWND, nCmdShow int32) bool {
-	ret, _, _ := syscall.Syscall(showWindow.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(showWindow.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(nCmdShow),
 		0)
@@ -3643,7 +3643,7 @@ func ShowWindow(hWnd HWND, nCmdShow int32) bool {
 }
 
 func SystemParametersInfo(uiAction, uiParam uint32, pvParam unsafe.Pointer, fWinIni uint32) bool {
-	ret, _, _ := syscall.Syscall6(systemParametersInfo.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(systemParametersInfo.Addr(), 4,
 		uintptr(uiAction),
 		uintptr(uiParam),
 		uintptr(pvParam),
@@ -3655,7 +3655,7 @@ func SystemParametersInfo(uiAction, uiParam uint32, pvParam unsafe.Pointer, fWin
 }
 
 func TrackMouseEvent(lpEventTrack *TRACKMOUSEEVENT) bool {
-	ret, _, _ := syscall.Syscall(trackMouseEvent.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(trackMouseEvent.Addr(), 1,
 		uintptr(unsafe.Pointer(lpEventTrack)),
 		0,
 		0)
@@ -3664,7 +3664,7 @@ func TrackMouseEvent(lpEventTrack *TRACKMOUSEEVENT) bool {
 }
 
 func TrackPopupMenu(hMenu HMENU, uFlags uint32, x, y int32, nReserved int32, hWnd HWND, prcRect *RECT) uint32 {
-	ret, _, _ := syscall.Syscall9(trackPopupMenu.Addr(), 7,
+	ret, _, _ := syscall.SyscallN(trackPopupMenu.Addr(), 7,
 		uintptr(hMenu),
 		uintptr(uFlags),
 		uintptr(x),
@@ -3679,7 +3679,7 @@ func TrackPopupMenu(hMenu HMENU, uFlags uint32, x, y int32, nReserved int32, hWn
 }
 
 func TrackPopupMenuEx(hMenu HMENU, fuFlags uint32, x, y int32, hWnd HWND, lptpm *TPMPARAMS) BOOL {
-	ret, _, _ := syscall.Syscall6(trackPopupMenuEx.Addr(), 6,
+	ret, _, _ := syscall.SyscallN(trackPopupMenuEx.Addr(), 6,
 		uintptr(hMenu),
 		uintptr(fuFlags),
 		uintptr(x),
@@ -3691,7 +3691,7 @@ func TrackPopupMenuEx(hMenu HMENU, fuFlags uint32, x, y int32, hWnd HWND, lptpm 
 }
 
 func TranslateMessage(msg *MSG) bool {
-	ret, _, _ := syscall.Syscall(translateMessage.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(translateMessage.Addr(), 1,
 		uintptr(unsafe.Pointer(msg)),
 		0,
 		0)
@@ -3700,12 +3700,12 @@ func TranslateMessage(msg *MSG) bool {
 }
 
 func UnhookWinEvent(hWinHookEvent HWINEVENTHOOK) bool {
-	ret, _, _ := syscall.Syscall(unhookWinEvent.Addr(), 1, uintptr(hWinHookEvent), 0, 0)
+	ret, _, _ := syscall.SyscallN(unhookWinEvent.Addr(), 1, uintptr(hWinHookEvent), 0, 0)
 	return ret != 0
 }
 
 func UpdateWindow(hwnd HWND) bool {
-	ret, _, _ := syscall.Syscall(updateWindow.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(updateWindow.Addr(), 1,
 		uintptr(hwnd),
 		0,
 		0)
@@ -3714,7 +3714,7 @@ func UpdateWindow(hwnd HWND) bool {
 }
 
 func WindowFromDC(hDC HDC) HWND {
-	ret, _, _ := syscall.Syscall(windowFromDC.Addr(), 1,
+	ret, _, _ := syscall.SyscallN(windowFromDC.Addr(), 1,
 		uintptr(hDC),
 		0,
 		0)
@@ -3723,7 +3723,7 @@ func WindowFromDC(hDC HDC) HWND {
 }
 
 func WindowFromPoint(Point POINT) HWND {
-	ret, _, _ := syscall.Syscall(windowFromPoint.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(windowFromPoint.Addr(), 2,
 		uintptr(Point.X),
 		uintptr(Point.Y),
 		0)
@@ -3731,7 +3731,7 @@ func WindowFromPoint(Point POINT) HWND {
 	return HWND(ret)
 }
 func IntersectRect(rcDst, src1, src2 *RECT) int32 {
-	ret, _, _ := syscall.Syscall(intersectRect.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(intersectRect.Addr(), 3,
 		uintptr(unsafe.Pointer(rcDst)),
 		uintptr(unsafe.Pointer(src1)),
 		uintptr(unsafe.Pointer(src2)))
@@ -3743,7 +3743,7 @@ func SetWindowText(hWnd HWND, text string) bool {
 	if err != nil {
 		return false
 	}
-	ret, _, _ := syscall.Syscall(setWindowText.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(setWindowText.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(lp)),
 		0)
@@ -3751,7 +3751,7 @@ func SetWindowText(hWnd HWND, text string) bool {
 	return ret != 0
 }
 func KeyBdEvent(key, scan byte, flag DWORD, info uintptr) {
-	syscall.Syscall6(keybdEvent.Addr(), 4,
+	syscall.SyscallN(keybdEvent.Addr(), 4,
 		uintptr(key),
 		uintptr(scan),
 		uintptr(flag),
@@ -3760,7 +3760,7 @@ func KeyBdEvent(key, scan byte, flag DWORD, info uintptr) {
 }
 func GetWindowText(hWnd HWND) string {
 	name := make([]uint16, MAX_PATH)
-	ret, _, _ := syscall.Syscall(getWindowText.Addr(), 3,
+	ret, _, _ := syscall.SyscallN(getWindowText.Addr(), 3,
 		uintptr(hWnd),
 		uintptr(unsafe.Pointer(&name[0])),
 		uintptr(MAX_PATH))
@@ -3780,14 +3780,14 @@ const (
 )
 
 func RegisterHotKey(hWnd HWND, id int32, fsModifiers uint32, vk uint32) bool {
-	ret, _, _ := syscall.Syscall6(registerHotKey.Addr(), 4,
+	ret, _, _ := syscall.SyscallN(registerHotKey.Addr(), 4,
 		uintptr(hWnd),
 		uintptr(id),
 		uintptr(fsModifiers), uintptr(vk), 0, 0)
 	return ret != 0
 }
 func UnregisterHotKey(hWnd HWND, id int32) bool {
-	ret, _, _ := syscall.Syscall(unregisterHotKey.Addr(), 2,
+	ret, _, _ := syscall.SyscallN(unregisterHotKey.Addr(), 2,
 		uintptr(hWnd),
 		uintptr(id),
 		0)

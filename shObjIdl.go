@@ -44,7 +44,7 @@ type IShellFolder struct {
 }
 
 func (is *IShellFolder) Release() HRESULT {
-	ret, _, _ := syscall.Syscall(is.LpVtbl.Release, 1,
+	ret, _, _ := syscall.SyscallN(is.LpVtbl.Release, 1,
 		uintptr(unsafe.Pointer(is)),
 		0,
 		0)
@@ -54,7 +54,7 @@ func (is *IShellFolder) Release() HRESULT {
 
 func (is *IShellFolder) EnumObjects(h HWND, flags SHCONTF) (IEnumIDList, HRESULT) {
 	var lpData IEnumIDList
-	ret, _, _ := syscall.Syscall(is.LpVtbl.EnumObjects, 3,
+	ret, _, _ := syscall.SyscallN(is.LpVtbl.EnumObjects, 3,
 		uintptr(h),
 		uintptr(flags),
 		uintptr(unsafe.Pointer(&lpData)))
@@ -96,7 +96,7 @@ type IEnumIDList struct {
 func (is *IEnumIDList) Next(celt uint32) (*ITEMIDLIST, uint32, HRESULT) {
 	var lpData *ITEMIDLIST
 	var cIds uint32
-	ret, _, _ := syscall.Syscall(is.LpVtbl.Next, 3,
+	ret, _, _ := syscall.SyscallN(is.LpVtbl.Next, 3,
 		uintptr(celt),
 		uintptr(unsafe.Pointer(&lpData)),
 		uintptr(unsafe.Pointer(&cIds)))

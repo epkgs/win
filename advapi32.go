@@ -9,10 +9,11 @@ package win
 
 import (
 	"errors"
-	"golang.org/x/sys/windows"
-	"golang.org/x/sys/windows/registry"
 	"syscall"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
+	"golang.org/x/sys/windows/registry"
 )
 
 const KEY_READ REGSAM = 0x20019
